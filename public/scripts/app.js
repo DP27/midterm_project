@@ -8,3 +8,7 @@
 //     }
 //   });;
 // });
+
+// $("#create").click(function() {
+//     window.location.href='/create';
+// })
