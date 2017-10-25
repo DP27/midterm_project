@@ -34,17 +34,57 @@
   
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section class="name">
-            <textarea name="name" placeholder="What are you humming about?"></textarea>
+      <form action="http://localhost:8080/create" method="post">
+        <section class="name">
+          <h2>Name:
+              <input type="name" name="name-field" placeholder="Name">
+          </h2>
+        </section>
+        <section class="email">
+          <h2>Email:
+              <input type="email" name="email-field" placeholder="username@domain.com">
+          </h2>
+        </section>
+        <section class="event-title">
+          <h2>Event Title:
+              <input type="text" name="event-title-field" placeholder="Title">
+          </h2>
+        </section>
+        <section class="description">
+          <h2>Description:
+              <textarea name="text" placeholder="What the event about?"></textarea>
+          </h2>
+        </section>
+        <section class="location">
+          <h2>Location:</h2>
+          <div id="map" style="width:70%;height:300px;"></div>
+            <script>
+              function initMap() {
+                var uluru = {lat: 43.6718, lng: -79.4668};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 4,
+                  center: uluru
+                });
+                var marker = new google.maps.Marker({
+                  position: uluru,
+                  map: map
+                });
+              }
+            </script>
+            <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&callback=initMap">
+            </script>
+        </section>
+        <section class="timeslot">
+            <h2>Timeslot:
+                <input type="date-time" name="timeslot-field" placeholder="Time">
+            </h2>
           </section>
-        <h2>Compose Tweet</h2>
-        <form action="http://localhost:8080/tweets" method="post">
-          <textarea name="text" placeholder="What are you humming about?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="counter">140</span>
-        </form>
-      </section>
-      <section id="empty"></section>
+            
+          
+      </form>
+    
+      
     </main>
 
   </body>
