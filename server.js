@@ -38,6 +38,17 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+// GENERATE ID
+function generateRandomString(length) {
+  let randomString = "";
+  const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < length; i++) {
+    randomString += charSet.charAt(Math.floor(Math.random() * charSet.length));
+  }
+  return randomString;
+}
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
@@ -48,15 +59,75 @@ app.get("/create", (req, res) => {
   res.render("create_event");
 });
 
-app.post("/create", (req, res) => {
+app.post("/:id", (req, res) => {
   //store the event information and user information
-  res.redirect("/:id");
+  if (!req.body.name) {
+    res.status(400).send("Please input a name.");
+  } else if (!req.body.email) {
+    res.status(400).send("Please input an email.");
+  } else if (!req.body.event_name) {
+    res.status(400).send("Please input an event name.");
+  } else if (!/* DATE TIME INPUTS */){
+    res.status(400).send("Please input at least one date and time.")
+  } else {
+    let id = generateRandomString(20);
+    // CHECK DATABASE IF ID EXISTS ALREADY
+    // IF NOT, ENTER INFO INTO DATABASE
+      // id, name, email, event name, location, description, date and time options
+    // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
+  res.redirect("/" + id);
+  }
 });
 
 app.get("/:id", (req, res) => {
-  res.render("view_event");
-})
+  // CHECK DATABASE IF ID EXISTS
+  if (!(req.params.id /* IN DATABASE */)) {
+    res.status(302).send("Event does not exist.");
+  } else {
+    // GET EVENT INFO FROM DATABASE
+    res.render("view_event");
+  }
+});
+
+app.post("/:id/delete", (req, res) => {
+  delete // ID AND ASSOCIATED INFO FROM DATABASE
+  res.redirect("/")
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
