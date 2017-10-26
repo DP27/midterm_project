@@ -57,6 +57,7 @@ app.get("/:id", (req, res) => {
   res.render("view_event");
 })
 
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
