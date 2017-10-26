@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: #000;
+  background: rgb(179, 167, 167);
 
 }
 
@@ -22,3 +22,18 @@ video {
   z-index:1;
   opacity: 1;
 }
+
+#view-page-body {
+  padding: 100px;
+}
+
+// .event_details {
+//   padding: 100px;
+//   button {
+//     padding: 10px;
+//     margin: 20px;
+//   }
+//   li {
+//     padding: 10px;
+//   }
+// }
