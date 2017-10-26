@@ -11,7 +11,7 @@
   
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <form action="/create" method="post">
+      <form method="POST" action="/create">
         <section class="name">
           <h4>Name:
               <input type="string" name="name" placeholder="Name">
@@ -24,17 +24,17 @@
         </section>
         <section class="title">
           <h4>Event Title:
-              <input type="string" name="title" placeholder="Title">
+              <input type="string" name="event_name" placeholder="Title">
           </h4>
         </section>
         <section class="description">
           <h4>Description:
-              <textarea name="text" placeholder="What's the event about?"></textarea>
+              <textarea name="description" placeholder="What's the event about?"></textarea>
           </h4>
         </section>
         <section class="location">
           <h4>Location:
-            <input class='address' type="text" name="location-field" placeholder="Location">
+            <input class='address' type="text" name="locationText" placeholder="Location">
             <button id='location' type="button">Submit</button>
           </h4>
           <div id="map" style="width:70%;height:300px;"></div>
@@ -58,17 +58,17 @@
         </section>
         <section class="timeslot-first">
             <h4>Timeslot(Most Preferred):
-                <input id="date" name="dateslot" type="date">
-                <input id="time" name="timeslot" type="time">
+                <input id="date" name="date" type="date">
+                <input id="time" name="time" type="time">
             </h4>
+            <section class="submit">
+              <button type="submit">Submit</button>
+            </section>
         </section>
-        <section class="submit">
-          <button type="button">Submit</button>
-        </section>
-           
         
-          
+        
       </form>
+      
     
       
     </main>

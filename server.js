@@ -67,7 +67,7 @@ app.post("/create", (req, res) => {
     res.status(400).send("Please input an email.");
   } else if (!req.body.event_name) {
     res.status(400).send("Please input an event name.");
-  } else if (!req.body.date || !rew.body.time) {
+  } else if (!req.body.date || !req.body.time) {
     res.status(400).send("Please input at least one date and time.")
   } else {
     let id = generateRandomString(20);
@@ -75,6 +75,24 @@ app.post("/create", (req, res) => {
     // IF NOT, ENTER INFO INTO DATABASE
       // id, name, email, event name, location, description, date and time options
     // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
+    var userTable = {name: req.body.name,
+                    email: req.body.email,
+                    password: ''}
+    knex('users').insert(userTable).then(result => {console.log(result)});
+    //knex('events').insert({description: req.body.description,
+    //                      longitude: req.body.locationText,
+    //                      latitude: ''});
+    //knex('event_slots').insert({event_id: req.body.event_name,
+    //                            date: req.body.date,
+    //                            time: req.body.time});
+    //knex('events_users').insert({owner: true});  
+    console.log(req.body.event_name);
+    console.log(req.body.date);
+    console.log(req.body.time);
+    console.log(req.body.locationText);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.description);
   res.redirect("/" + id);
   }
 });
