@@ -17,7 +17,9 @@ $(document).ready(function getlocation(){
           getLatLng(locationText);
       })
 
-})
+});
+
+
 
 function getLatLng(locationText){
     var geocoder = new google.maps.Geocoder();
@@ -28,12 +30,16 @@ function getLatLng(locationText){
           if (status == google.maps.GeocoderStatus.OK) {
             let lat = results[0].geometry.location.lat();
             let lng = results[0].geometry.location.lng();
-            
-             console.log(results[0].geometry.location.lat());
-             console.log(results[0].geometry.location.lng());
-             let arr = [lat,lng];
-             retlatlng(arr);
-             return arr;
+            var uluru = {lat: lat, lng: lng};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 13,
+              center: uluru
+            });
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });
+            return;
           }
           else {
              console.log("Geocoding failed: " + status);
@@ -43,14 +49,6 @@ function getLatLng(locationText){
 
 }
 
-function retlatlng(arr){
-    if(arr[0]){
-        let dir = {lat: arr[0],lng: arr[1]};
-        console.log(dir);
-        return dir;
-    }
-
-}
 
 
 
