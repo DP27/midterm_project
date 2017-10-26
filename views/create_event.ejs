@@ -33,9 +33,13 @@
           </h2>
         </section>
         <section class="location">
-          <h2>Location:</h2>
+          <h2>Location:
+            <input class='location-placeholder' type="text" name="location-field" placeholder="Location">
+            <button id='location' type="button">Submit</button>
+          </h2>
           <div id="map" style="width:70%;height:300px;"></div>
             <script>
+            
               function initMap() {
                 var uluru = {lat: 43.6718, lng: -79.4668};
                 var map = new google.maps.Map(document.getElementById('map'), {
