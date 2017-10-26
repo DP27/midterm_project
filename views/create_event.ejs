@@ -34,32 +34,32 @@
   
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <form action="http://localhost:8080/create" method="post">
+      <form action="/create" method="post">
         <section class="name">
-          <h2>Name:
-              <input type="name" name="name-field" placeholder="Name">
-          </h2>
+          <h4>Name:
+              <input type="string" name="name" placeholder="Name">
+          </h4>
         </section>
         <section class="email">
-          <h2>Email:
-              <input type="email" name="email-field" placeholder="username@domain.com">
-          </h2>
+          <h4>Email:
+              <input type="email" name="email" placeholder="username@domain.com">
+          </h4>
         </section>
-        <section class="event-title">
-          <h2>Event Title:
-              <input type="text" name="event-title-field" placeholder="Title">
-          </h2>
+        <section class="title">
+          <h4>Event Title:
+              <input type="string" name="title" placeholder="Title">
+          </h4>
         </section>
         <section class="description">
-          <h2>Description:
-              <textarea name="text" placeholder="What the event about?"></textarea>
-          </h2>
+          <h4>Description:
+              <textarea name="text" placeholder="What's the event about?"></textarea>
+          </h4>
         </section>
         <section class="location">
-          <h2>Location:
-            <input class='location-placeholder' type="text" name="location-field" placeholder="Location">
+          <h4>Location:
+            <input class='address' type="text" name="location-field" placeholder="Location">
             <button id='location' type="button">Submit</button>
-          </h2>
+          </h4>
           <div id="map" style="width:70%;height:300px;"></div>
             <script>
             
@@ -79,12 +79,17 @@
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&callback=initMap">
             </script>
         </section>
-        <section class="timeslot">
-            <h2>Timeslot:
-                <input id="date" name="timeslot-field" type="date">
-            </h2>
-          </section>
-            
+        <section class="timeslot-first">
+            <h4>Timeslot(Most Preferred):
+                <input id="date" name="dateslot" type="date">
+                <input id="time" name="timeslot" type="time">
+            </h4>
+        </section>
+        <section class="submit">
+          <button type="button">Submit</button>
+        </section>
+           
+        
           
       </form>
     
