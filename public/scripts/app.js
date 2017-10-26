@@ -9,11 +9,11 @@
 //   });;
 // });
 
-
 $(document).ready(function getlocation(){
 
       $('#location').on('click',function(){
-          let locationText = $(document).find('.location-placeholder').val();
+          let locationText = $(document).find('.address').val();
+          console.log(locationText);
           getLatLng(locationText);
       })
 
@@ -49,12 +49,3 @@ function getLatLng(locationText){
 
 }
 
-
-<<<<<<< HEAD
-
-=======
-// $("#create").click(function() {
-//     window.location.href='/create';
-// })
-27479c8e82d360ccab2ac857777cefd1d982b3b5
->>>>>>> 50114b270f685ada6263efd9b07cd795f77a2807
