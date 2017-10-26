@@ -1,33 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-
-  </head>
-  <% include partials/_nav %>
-  <body>
-    <h1>Welcome to Schoodle!</h1>
-    <p>Schoodle allows you to create events, poll dates and times, and invite your friends to vote.</p>
-    <p>Do you have an event that you need to plan? Are you having trouble getting people to agree 
-    on a date? If you answered yes to these questions then schoodle is right for you!</p>
-    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-    mollit anim id est laborum."</p><br>
-    <video width="600" height="300" autoplay loop>
-      <source src="images/short.mp4" type="video/mp4">
-    </video>
-    <!--<button class="button" id="create"> Create an event now! </button>-->
-    <a href="create">Plan your event now</a>
+  <% include partials/_head %>
+  <body class="container-fluid text-center">
+    <% include partials/_nav %>
+    <div class="main-body">
+      <h1>Welcome to Schoodle!</h1>
+      <p>Schoodle allows you to create events, poll dates and times, and invite your friends to vote.</p>
+      <p>Do you have an event that you need to plan? Are you having trouble getting people to agree 
+      on a date? If you answered yes to these questions then schoodle is right for you!</p>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+      mollit anim id est laborum."</p><br>
+      <video width="600" height="300" autoplay loop>
+        <source src="images/short.mp4" type="video/mp4">
+      </video>
+      <!--<button class="button" id="create"> Create an event now! </button>-->
+      <a href="create" class="btn btn-info" role="button">Plan your event now</a>
+    </div>
   </body>
 </html>
