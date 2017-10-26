@@ -16,6 +16,8 @@ const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+//const eventsRoutes = require("./routes/events");
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -67,8 +69,8 @@ app.post("/:id", (req, res) => {
     res.status(400).send("Please input an email.");
   } else if (!req.body.event_name) {
     res.status(400).send("Please input an event name.");
-  } else if (!/* DATE TIME INPUTS */){
-    res.status(400).send("Please input at least one date and time.")
+  //} else if (!/* DATE TIME INPUTS */){
+    //res.status(400).send("Please input at least one date and time.")
   } else {
     let id = generateRandomString(20);
     // CHECK DATABASE IF ID EXISTS ALREADY
@@ -98,37 +100,3 @@ app.post("/:id/delete", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
