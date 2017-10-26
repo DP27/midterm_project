@@ -67,9 +67,10 @@ app.post("/:id", (req, res) => {
     res.status(400).send("Please input an email.");
   } else if (!req.body.event_name) {
     res.status(400).send("Please input an event name.");
-  } else if (!/* DATE TIME INPUTS */){
-    res.status(400).send("Please input at least one date and time.")
-  } else {
+  } //else if (!/* DATE TIME INPUTS */){
+  //   res.status(400).send("Please input at least one date and time.")
+  // } 
+    else {
     let id = generateRandomString(20);
     // CHECK DATABASE IF ID EXISTS ALREADY
     // IF NOT, ENTER INFO INTO DATABASE
