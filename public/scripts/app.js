@@ -9,10 +9,10 @@
 //   });;
 // });
 
-<<<<<<< HEAD
+HEAD
 
 $(document).ready(function getlocation(){
-    
+
       $('#location').on('click',function(){
           let locationText = $(document).find('.location-placeholder').val();
           getLatLng(locationText);
@@ -25,7 +25,7 @@ $(document).ready(function getlocation(){
 function getLatLng(locationText){
     var geocoder = new google.maps.Geocoder();
     var address = locationText;
- 
+
     if (geocoder) {
        geocoder.geocode({ 'address': address }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
@@ -46,16 +46,12 @@ function getLatLng(locationText){
              console.log("Geocoding failed: " + status);
           }
        });
-    }    
+    }
 
 }
 
 
-
-
-
-=======
 // $("#create").click(function() {
 //     window.location.href='/create';
 // })
->>>>>>> 27479c8e82d360ccab2ac857777cefd1d982b3b5
+27479c8e82d360ccab2ac857777cefd1d982b3b5
