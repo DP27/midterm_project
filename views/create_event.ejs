@@ -18,7 +18,7 @@
     
 
     <!-- External JS -->
-    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
    
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -56,7 +56,10 @@
           </h2>
         </section>
         <section class="location">
-          <h2>Location:</h2>
+          <h2>Location:
+            <input class='location-placeholder' type="text" name="location-field" placeholder="Location">
+            <button id='location' type="button">Submit</button>
+          </h2>
           <div id="map" style="width:70%;height:300px;"></div>
             <script>
               function initMap() {
@@ -66,7 +69,7 @@
                   center: uluru
                 });
                 var marker = new google.maps.Marker({
-                  position: uluru,
+                  position: dir,
                   map: map
                 });
               }
