@@ -9,6 +9,7 @@
 //   });;
 // });
 
+<<<<<<< HEAD
 
 $(document).ready(function getlocation(){
     
@@ -53,3 +54,8 @@ function getLatLng(locationText){
 
 
 
+=======
+// $("#create").click(function() {
+//     window.location.href='/create';
+// })
+>>>>>>> 27479c8e82d360ccab2ac857777cefd1d982b3b5
