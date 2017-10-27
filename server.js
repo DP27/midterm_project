@@ -85,34 +85,36 @@ app.post("/create", (req, res) => {
                       title:req.body.event_name,
                       url:`http://localhost:${PORT}/${uniqueId}`
                       };
+                      console.log(eventsTable.title);
     var event_slotsTable = {event_id: eventsTable.id,
                             date: req.body.date,
                             time: req.body.time};
-    knex('users').insert(userTable).then(result => {
-                                        if(result){
-                                          knex('events').insert(eventsTable).then(result => {
-                                            if(result){
-                                              knex('event_slots').insert(event_slotsTable).then(result => {
-                                                if(result){
-                                                  knex('events_users').insert({owner: true}).then(result => {
-                                                    console.log(result);
-                                                  });
-                                                }
-                                              });
-                                            }
-                                          });                                    
-                                         }        
-                                      })
-    
-    
-      
-    console.log(req.body.event_name);
-    console.log(req.body.date);
-    console.log(req.body.time);
-    console.log(req.body.locationText);
-    console.log(req.body.name);
-    console.log(req.body.email);
-    console.log(req.body.description);
+    knex('users')
+    .insert(userTable)
+    .returning('id')
+    .then(result => {
+      let user_id = result[0];
+      if(result){
+        knex('events')
+        .insert(eventsTable)
+        .then(result => {
+          if(result){
+            knex('event_slots')
+            .insert(event_slotsTable)
+            .then(result => {
+              if(result){
+                knex('events_users')
+                .insert({user_id, event_id: eventsTable.id ,owner: true})
+                .then(result => {
+                  console.log(result);
+                });
+              }
+            });
+          }
+        });                                    
+      }        
+    })
+
   res.redirect("/" + uniqueId);
   }
 });
@@ -146,7 +148,7 @@ app.post('/vote', (req, res) => {
 
 
   // Step: 2 Create Votes
-  insert into votes (user_id, event_id) values (user_id, slot_id[0])
+  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
 
 
 
