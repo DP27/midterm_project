@@ -11,33 +11,28 @@
   
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <form method="POST" action="/create">
-        <section class="name">
-          <h4>Name:
-              <input type="string" name="name" placeholder="Name">
-          </h4>
+      <form action="/create" method="post">
+        <section class="name form-group">
+          <label>Name</lable>
+              <input type="text" name="name" placeholder="Your Name" class="form-control">
         </section>
-        <section class="email">
-          <h4>Email:
-              <input type="email" name="email" placeholder="username@domain.com">
-          </h4>
+        <section class="email form-group">
+            <label for="email">Email address:</label>
+            <input type="email" name="email" placeholder="username@domain.com" class="form-control">
         </section>
-        <section class="title">
-          <h4>Event Title:
-              <input type="string" name="event_name" placeholder="Title">
-          </h4>
+        <section class="title form-group">
+          <label>Event Title:</label>
+              <input type="text" name="title" placeholder="Title" class="form-control">
         </section>
-        <section class="description">
-          <h4>Description:
-              <textarea name="description" placeholder="What's the event about?"></textarea>
-          </h4>
+        <section class="description form-group">
+          <label>Description:</label>
+              <textarea name="text" placeholder="What's the event about?" class="form-control"></textarea>
         </section>
-        <section class="location">
-          <h4>Location:
-            <input class='address' type="text" name="locationText" placeholder="Location">
-            <button id='location' type="button">Submit</button>
-          </h4>
-          <div id="map" style="width:70%;height:300px;"></div>
+        <section class="location form-group form-inline">
+          <label>Location:</label>
+            <input class="address form-control" type="text" name="location-field" placeholder="Location">
+            <button id='location' type="button" class="btn">Search</button>
+          <div id="map" style="width:30%;height:300px;"></div>
             <script>
             
               function initMap() {
@@ -56,15 +51,15 @@
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&callback=initMap">
             </script>
         </section>
-        <section class="timeslot-first">
-            <h4>Timeslot(Most Preferred):
-                <input id="date" name="date" type="date">
-                <input id="time" name="time" type="time">
-            </h4>
-            <section class="submit">
-              <button type="submit">Submit</button>
-            </section>
+        <section class="timeslot-first form-group">
+            <label>Timeslot(Most Preferred):</label>
+                <input id="date" name="dateslot" type="date" class="form-control">
+                <input id="time" name="timeslot" type="time" class="form-control">
         </section>
+        <section class="submit">
+          <button type="button" class="btn">Submit</button>
+        </section>
+           
         
         
       </form>
