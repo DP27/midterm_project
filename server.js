@@ -45,6 +45,7 @@ function generateRandomString(length) {
   let randomString = "";
   const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+
   for (var i = 0; i < length; i++) {
     randomString += charSet.charAt(Math.floor(Math.random() * charSet.length));
   }
@@ -69,15 +70,52 @@ app.post("/create", (req, res) => {
     res.status(400).send("Please input an email.");
   } else if (!req.body.event_name) {
     res.status(400).send("Please input an event name.");
-  } else if (!req.body.date || !rew.body.time) {
+  } else if (!req.body.date || !req.body.time) {
     res.status(400).send("Please input at least one date and time.")
   } else {
-    let id = generateRandomString(20);
+    let uniqueId = generateRandomString(20);
     // CHECK DATABASE IF ID EXISTS ALREADY
     // IF NOT, ENTER INFO INTO DATABASE
       // id, name, email, event name, location, description, date and time options
     // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
-  res.redirect("/" + id);
+    var userTable = {email: req.body.email,
+                    name: req.body.name,
+                    password: 'something'};
+    var eventsTable = {id :uniqueId,
+                      description: req.body.description,
+                      location: req.body.locationText,
+                      title:req.body.event_name,
+                      url:`http://localhost:${PORT}/${uniqueId}`
+                      };
+    var event_slotsTable = {event_id: eventsTable.id,
+                            date: req.body.date,
+                            time: req.body.time};
+    knex('users').insert(userTable).then(result => {
+                                        if(result){
+                                          knex('events').insert(eventsTable).then(result => {
+                                            if(result){
+                                              knex('event_slots').insert(event_slotsTable).then(result => {
+                                                if(result){
+                                                  knex('events_users').insert({owner: true}).then(result => {
+                                                    console.log(result);
+                                                  });
+                                                }
+                                              });
+                                            }
+                                          });                                    
+                                         }        
+                                      })
+    
+    
+      
+    console.log(req.body.event_name);
+    console.log(req.body.date);
+    console.log(req.body.time);
+    console.log(req.body.locationText);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.description);
+  res.redirect("/" + uniqueId);
   }
 });
 
@@ -95,6 +133,26 @@ app.post("/:id/delete", (req, res) => {
   delete // ID AND ASSOCIATED INFO FROM DATABASE
   res.redirect("/")
 });
+
+
+
+app.post('/vote', (req, res) => {
+  req.body = {
+    name: 'akkjhdf',
+    email: 'asdf',
+    event_slot_id: [3,2]
+  }
+
+
+  // Step 1: Create a user, and get a user id
+
+
+  // Step: 2 Create Votes
+  insert into votes (user_id, event_id) values (user_id, slot_id[0])
+
+
+
+})
 
 
 app.listen(PORT, () => {
