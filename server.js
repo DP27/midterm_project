@@ -43,6 +43,7 @@ function generateRandomString(length) {
   let randomString = "";
   const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+
   for (var i = 0; i < length; i++) {
     randomString += charSet.charAt(Math.floor(Math.random() * charSet.length));
   }
@@ -100,7 +101,8 @@ app.post("/create", (req, res) => {
                                               });
                                             }
                                           });                                    
-             }        })
+                                         }        
+                                      })
     
     
       
@@ -129,6 +131,26 @@ app.post("/:id/delete", (req, res) => {
   delete // ID AND ASSOCIATED INFO FROM DATABASE
   res.redirect("/")
 });
+
+
+
+app.post('/vote', (req, res) => {
+  req.body = {
+    name: 'akkjhdf',
+    email: 'asdf',
+    event_slot_id: [3,2]
+  }
+
+
+  // Step 1: Create a user, and get a user id
+
+
+  // Step: 2 Create Votes
+  insert into votes (user_id, event_id) values (user_id, slot_id[0])
+
+
+
+})
 
 
 app.listen(PORT, () => {
