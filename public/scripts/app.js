@@ -1,27 +1,40 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
+function createDateTime() {
+  let button = $("<button>").attr('type', "button")
+                            .addClass("btn delete-slot")
+                            .text("-")
 
-$(document).ready(function getlocation(){
+  let newTimeSlot = $("<section>").addClass("timeslot form-group").append(
+    $("<input>").attr('id', "date")
+                .attr('name', "dateslot")
+                .attr('type', "date")
+                .addClass("form-control")
+    ).append($("<input>").attr('id', "time")
+                         .attr('name', "timeslot")
+                         .attr('type', "time")
+                         .addClass("form-control")
+    ).append(button)
+
+  $('.timeslots').append(newTimeSlot);
+
+  button.on('click', function() {
+    newTimeSlot.remove()
+  })
+}
+
+$(document).ready(function() {
+
+  $('#add-slot').on('click', createDateTime)
+
+  function getlocation(){
 
       $('#location').on('click',function(){
           let locationText = $(document).find('.address').val();
           console.log(locationText);
           getLatLng(locationText);
       })
+  }
 
-});
-
-
-
-function getLatLng(locationText){
+  function getLatLng(locationText){
     var geocoder = new google.maps.Geocoder();
     var address = locationText;
 
@@ -46,6 +59,6 @@ function getLatLng(locationText){
           }
        });
     }
-
-}
+  }
+});
 
