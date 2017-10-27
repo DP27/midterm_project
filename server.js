@@ -70,7 +70,7 @@ app.post("/create", (req, res) => {
   } else if (!req.body.date || !req.body.time) {
     res.status(400).send("Please input at least one date and time.")
   } else {
-    let id = generateRandomString(20);
+    let uniqueId = generateRandomString(20);
     // CHECK DATABASE IF ID EXISTS ALREADY
     // IF NOT, ENTER INFO INTO DATABASE
       // id, name, email, event name, location, description, date and time options
@@ -78,14 +78,32 @@ app.post("/create", (req, res) => {
     var userTable = {email: req.body.email,
                     name: req.body.name,
                     password: 'something'};
-    knex('users').insert(userTable).then(result => {console.log(result)});
-    //knex('events').insert({description: req.body.description,
-    //                      longitude: req.body.locationText,
-    //                      latitude: ''});
-    //knex('event_slots').insert({event_id: req.body.event_name,
-    //                            date: req.body.date,
-    //                            time: req.body.time});
-    //knex('events_users').insert({owner: true});  
+    var eventsTable = {id :uniqueId,
+                      description: req.body.description,
+                      location: req.body.locationText,
+                      title:req.body.event_name,
+                      url:`http://localhost:${PORT}/${uniqueId}`
+                      };
+    var event_slotsTable = {event_id: eventsTable.id,
+                            date: req.body.date,
+                            time: req.body.time};
+    knex('users').insert(userTable).then(result => {
+                                        if(result){
+                                          knex('events').insert(eventsTable).then(result => {
+                                            if(result){
+                                              knex('event_slots').insert(event_slotsTable).then(result => {
+                                                if(result){
+                                                  knex('events_users').insert({owner: true}).then(result => {
+                                                    console.log(result);
+                                                  });
+                                                }
+                                              });
+                                            }
+                                          });                                    
+             }        })
+    
+    
+      
     console.log(req.body.event_name);
     console.log(req.body.date);
     console.log(req.body.time);
@@ -93,7 +111,7 @@ app.post("/create", (req, res) => {
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(req.body.description);
-  res.redirect("/" + id);
+  res.redirect("/" + uniqueId);
   }
 });
 
