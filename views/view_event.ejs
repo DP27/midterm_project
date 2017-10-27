@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include partials/_head.ejs %>
-
-  <body class="container-fluid text-center">
+  <nav id="nav-bar">
     <% include ./partials/_nav.ejs %>
-    <div id="view-page-body">
+  </nav>
+  <body>
+    <h4 class="container">Please enter your name and email to submit your availability.</h4>
+    <form class="container">
+        <section class="name form-group">
+          <label>Name:</label>
+              <input type="text" name="name" placeholder="Your Name" class="form-control">
+        </section>
+        <section class="email form-group">
+          <label for="email">Email:</label>
+              <input type="email" name="email" placeholder="username@domain.com" class="form-control">
+        </section>
+        <section class="submit">
+          <button type="button" class="btn">Submit</button>
+        </section>
+    </form>
+    <div id="view-page-body" class="container">
         <div class="checkbox">
             <label><input type="checkbox" value="">Option 1</label>
         </div>

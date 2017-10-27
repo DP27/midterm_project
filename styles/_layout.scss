@@ -25,8 +25,43 @@ video {
 
 #view-page-body {
   padding: 100px;
+  label {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 10px;
+    border: 1px solid, lightslategray;
+    font-size: x-large;
+    border-radius: 10px;
+    background-color: lightslategrey;
+
+  }
 }
 
+.timeslot-first {
+  padding-right: 980px;
+}
+.email {
+  padding-right: 900px;
+}
+
+.name {
+  padding-right: 900px;
+}
+
+.title {
+  padding-right: 500px;
+}
+
+.description {
+  padding-right: 500px;
+}
+
+
+#location {
+  margin: 10px;
+}
 // .event_details {
 //   padding: 100px;
 //   button {
