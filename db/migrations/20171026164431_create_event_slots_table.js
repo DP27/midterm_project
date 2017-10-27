@@ -1,10 +1,12 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('event_slots', function (table) {
-    table.increments('id').primary();
-    table.integer('event_id').unsigned().references('events.id');
-    table.integer('date');
-    table.integer('time');
-  });
+  return Promise.all([ 
+    knex.schema.createTable('event_slots', function (table) {
+      table.increments('id').primary();
+      table.integer('event_id').unsigned().references('events.id');
+      table.integer('date');
+      table.integer('time');
+    })
+  ])  
 };
 
 exports.down = function(knex, Promise) {

@@ -75,9 +75,9 @@ app.post("/create", (req, res) => {
     // IF NOT, ENTER INFO INTO DATABASE
       // id, name, email, event name, location, description, date and time options
     // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
-    var userTable = {name: req.body.name,
-                    email: req.body.email,
-                    password: ''}
+    var userTable = {email: req.body.email,
+                    name: req.body.name,
+                    password: 'something'};
     knex('users').insert(userTable).then(result => {console.log(result)});
     //knex('events').insert({description: req.body.description,
     //                      longitude: req.body.locationText,
