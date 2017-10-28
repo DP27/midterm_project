@@ -16,7 +16,8 @@ const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-const event_slotsRoutes = require("./routes/event_slots")
+const event_slotsRoutes = require("./routes/event_slots");
+const load_eventRoutes = require("./routes/load_event");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -39,6 +40,7 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/event_slots", event_slotsRoutes(knex));
+app.use("/api/load_event", load_eventRoutes(knex));
 
 // GENERATE ID
 function generateRandomString(length) {
@@ -135,7 +137,7 @@ app.get("/:id", (req, res) => {
         // Found event respond with data
       let event = req.params.id;
       res.render('view_event', {event: event});
-      
+
     } else {
       // Did not find event send 404
       res.status(404).send("Event does not exist.");
