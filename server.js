@@ -168,7 +168,7 @@ app.post('/:id', (req, res) => {
       return Promise.all(promises);
     }
   }).then((result) => {
-    res.status(200).send("thank you for voting");
+    res.status(200).send("Thank you for voting.");
   }).catch((e) => {
     res.status(500).send();
   });
