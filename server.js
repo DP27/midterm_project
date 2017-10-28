@@ -87,10 +87,18 @@ app.post("/create", (req, res) => {
                       title:req.body.event_name,
                       url:`http://localhost:${PORT}/${uniqueId}`
                       };
-                      console.log(eventsTable.title);
+     
+    const eventDate = typeof req.body.date === 'string' ? [req.body.date] : req.body.date;                 
+    const eventTime = typeof req.body.time === 'string' ? [req.body.time] : req.body.time;  
+    const eventDateTime = [];
+    for (let i=0; i<eventDate.length; i++){
+      eventDateTime.push([eventDate[i],eventTime[i]]);
+    }            
+    
     var event_slotsTable = {event_id: eventsTable.id,
-                            date: req.body.date,
-                            time: req.body.time};
+                            date: eventDate,
+                            time: eventTime};
+                    
     knex('users')
     .insert(userTable)
     .returning('id')
@@ -99,29 +107,38 @@ app.post("/create", (req, res) => {
         return knex('events')
         .insert(eventsTable)
         .then(result => {
-            return knex('event_slots')
-            .insert(event_slotsTable)
-            .then(result => {
-                return knex('events_users')
-                .insert({user_id, event_id: eventsTable.id ,owner: true})
-            });
-        });                                           
-    }).then(() => {
+          const promises = eventDateTime.map((timeSlot) => {
+            return knex('event_slots').insert({
+              event_id: eventsTable.id,
+                date: timeSlot[0],
+                time: timeSlot[1]
+            })  
+          })  
+          return Promise.all(promises);
+        }).then(result => {
+          return knex('events_users')
+          .insert({user_id, event_id: eventsTable.id, owner: true})
+        })
+    }).then((result) => {
       res.redirect("/" + uniqueId);
     }).catch((e) => {
       console.log('error', e);
-    });
-  }
-});
+    })
+    }
+  })        
 
 app.get("/:id", (req, res) => {
   knex('events').select('*').where({id: req.params.id})
   .then(rows => {
     const event = rows[0];
     if (event) {
+      return knex('event_slots').select('*').where({event_id: req.params.id})
+      .then(result => {
+        const eventSlots = result;
+      })
       // Found event respond with data
       let event = req.params.id;
-      res.render('view_event', {event: event});
+      res.render('view_event', {event: event, eventSlots: eventSlots});
     } else {
       // Did not find event send 404
       res.status(404).send("Event does not exist.");
@@ -158,9 +175,6 @@ app.post('/:id', (req, res) => {
   }).catch((e) => {
     res.status(500).send();
   });
-
-  // Step: 2 Create Votes
-  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
 })
 
 app.post("/:id/delete", (req, res) => {

@@ -5,11 +5,11 @@ function createDateTime() {
 
   let newTimeSlot = $("<section>").addClass("timeslot form-group").append(
     $("<input>").attr('id', "date")
-                .attr('name', "dateslot")
+                .attr('name', "date")
                 .attr('type', "date")
                 .addClass("form-control")
     ).append($("<input>").attr('id', "time")
-                         .attr('name', "timeslot")
+                         .attr('name', "time")
                          .attr('type', "time")
                          .addClass("form-control")
     ).append(button)
