@@ -87,10 +87,18 @@ app.post("/create", (req, res) => {
                       title:req.body.event_name,
                       url:`http://localhost:${PORT}/${uniqueId}`
                       };
-                      console.log(eventsTable.title);
+     
+    const eventDate = typeof req.body.date === 'string' ? [req.body.date] : req.body.date;                 
+    const eventTime = typeof req.body.time === 'string' ? [req.body.time] : req.body.time;  
+    const eventDateTime = [];
+    for (let i=0; i<eventDate.length; i++){
+      eventDateTime.push([eventDate[i],eventTime[i]]);
+    }            
+    
     var event_slotsTable = {event_id: eventsTable.id,
-                            date: req.body.date,
-                            time: req.body.time};
+                            date: eventDate,
+                            time: eventTime};
+                    
     knex('users')
     .insert(userTable)
     .returning('id')
@@ -99,20 +107,25 @@ app.post("/create", (req, res) => {
         return knex('events')
         .insert(eventsTable)
         .then(result => {
-            return knex('event_slots')
-            .insert(event_slotsTable)
-            .then(result => {
-                return knex('events_users')
-                .insert({user_id, event_id: eventsTable.id ,owner: true})
-            });
-        });                                           
-    }).then(() => {
+          const promises = eventDateTime.map((timeSlot) => {
+            return knex('event_slots').insert({
+              event_id: eventsTable.id,
+                date: timeSlot[0],
+                time: timeSlot[1]
+            })  
+          })  
+          return Promise.all(promises);
+        }).then(result => {
+          return knex('events_users')
+          .insert({user_id, event_id: eventsTable.id, owner: true})
+        })
+    }).then((result) => {
       res.redirect("/" + uniqueId);
     }).catch((e) => {
       console.log('error', e);
-    });
-  }
-});
+    })
+    }
+  })        
 
 app.get("/:id", (req, res) => {
   knex('events').select('*').where({id: req.params.id})
@@ -158,9 +171,6 @@ app.post('/:id', (req, res) => {
   }).catch((e) => {
     res.status(500).send();
   });
-
-  // Step: 2 Create Votes
-  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
 })
 
 app.post("/:id/delete", (req, res) => {
