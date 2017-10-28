@@ -78,7 +78,7 @@ app.post("/create", (req, res) => {
     // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
     var userTable = {email: req.body.email,
                     name: req.body.name,
-                    password: 'something'};
+                    password: ''};
     var eventsTable = {id :uniqueId,
                       description: req.body.description,
                       location: req.body.locationText,
@@ -120,39 +120,50 @@ app.post("/create", (req, res) => {
 });
 
 app.get("/:id", (req, res) => {
-  // CHECK DATABASE IF ID EXISTS
-  if (!(req.params.id /* IN DATABASE */)) {
-    res.status(302).send("Event does not exist.");
-  } else {
-    // GET EVENT INFO FROM DATABASE
-    res.render("view_event");
-  }
+  knex('events').select('*').where({id: req.params.id})
+  .then(rows => {
+    const event = rows[0];
+    if (event) {
+      // Found event respond with data
+      let event = req.params.id;
+      res.render('view_event', {event: event});
+    } else {
+      // Did not find event send 404
+      res.status(404).send("Event does not exist.");
+    }
+  })
+  .catch(error => {
+    // Send error to client
+    throw error;
+  })
 });
+
+app.post('/:id', (req, res) => {  
+  knex('users')
+  .insert({name: req.body.name, email: req.body.email})
+  .returning('id')
+  .then(result => {
+    let user_id = result[0];
+    if (result) {
+      return knex('event_slots').select('id').where({event_id: req.params.id})
+      .then(result => {
+        console.log('event-slots result: ', result[0].id);
+        return knex('votes')
+          .insert({user_id, slot_id: result[0].id})
+          .then(result => {
+            console.log(result);
+          });
+      })
+    }
+  })
+  // Step: 2 Create Votes
+  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
+})
 
 app.post("/:id/delete", (req, res) => {
   delete // ID AND ASSOCIATED INFO FROM DATABASE
   res.redirect("/")
 });
-
-
-
-app.post('/vote', (req, res) => {
-  req.body = {
-    name: 'akkjhdf',
-    email: 'asdf',
-    event_slot_id: [3,2]
-  }
-
-
-  // Step 1: Create a user, and get a user id
-
-
-  // Step: 2 Create Votes
-  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
-
-
-
-})
 
 
 app.listen(PORT, () => {
