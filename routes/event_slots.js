@@ -10,7 +10,7 @@ module.exports = (knex) => {
     knex
       .select("time")
       .from("event_slots")
-      .where("event_id", req.params.id)
+      //.where("event_id", req.params.id)
       .then((results) => {
         res.json(results);
     });
