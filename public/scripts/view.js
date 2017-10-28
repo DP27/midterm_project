@@ -26,11 +26,11 @@ function createNames(user) {
 
 
 $(() => {
-
+  var eventId = $("#event-id").text();
   // DOM has loaded
   $.ajax({
     method: "GET",
-    url: "/api/event_slots"
+    url: "/api/event_slots/" + eventId
   }).done((event_slot) => {
 
     for(slot of event_slot) {
