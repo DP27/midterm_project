@@ -135,10 +135,10 @@ app.get("/:id", (req, res) => {
       return knex('event_slots').select('*').where({event_id: req.params.id})
       .then(result => {
         const eventSlots = result;
-      })
-      // Found event respond with data
+        // Found event respond with data
       let event = req.params.id;
       res.render('view_event', {event: event, eventSlots: eventSlots});
+      })
     } else {
       // Did not find event send 404
       res.status(404).send("Event does not exist.");
@@ -171,7 +171,7 @@ app.post('/:id', (req, res) => {
       return Promise.all(promises);
     }
   }).then(() => {
-    res.status(200).send("");
+    res.status(200).send("thank you for voting");
   }).catch((e) => {
     res.status(500).send();
   });
