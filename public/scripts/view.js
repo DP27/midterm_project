@@ -1,3 +1,30 @@
+function createSlot(event_slot) {
+  let slotHTML = $(".slots").append(
+          $("<article>").addClass("each-slot")
+            .append($("<header>")
+            .append($("<span>")
+            .addClass("date")
+            .text(slot.date)
+            )
+            .append($("<span>")
+            .addClass("time")
+            .text(slot.time)
+            )
+          )
+      );
+
+  return slotHTML;
+}
+
+function createNames(user) {
+  let namesHTML = $(".names").append(
+                  $("<p>").addClass("slot-names")
+                  .text(user.name)
+                  );
+  return namesHTML;
+};
+
+
 $(() => {
 
   // DOM has loaded
@@ -7,31 +34,24 @@ $(() => {
   }).done((event_slot) => {
 
     for(slot of event_slot) {
-      $("#view-page-body").append(
-        $("<article>").addClass("each-slot")
-          .append($("<header>")
-            .append($("<span>")
-            .addClass("date")
-            .text(slot.date)
-            )
-          )
-      );
+      createSlot(slot);
     }
   });
+
+  $.ajax({
+    method: "GET",
+    url: "/api/users"
+  }).done((users) => {
+
+    for(user of users) {
+      createNames(user);
+    }
+  });
+
+  $('.slot-names').hide();
+  $('each-slot').click(function() {
+    $('.slot-names').slideToggle();
+  });
+
+
 });
-
-
-// function createSlot(event_slot) {
-//   let slotHTML = $("<article").addClass("each-slot")
-//                               .append("<header>")
-
-//   `
-//     <article class="each-slot">
-//       <header>
-//         ${ $('<span class="date">').text(midterm.event_slots.date).prop('outerHTML') }
-//         <span class="time">${midterm.event_slots.time}</span>
-//       </header>
-//     </article>`
-
-//   return slotHTML;
-// }
