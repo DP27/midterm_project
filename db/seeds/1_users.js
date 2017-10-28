@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
                               name: 'Bob Bobbly',
                               email: 'bobblybob@bobsemail.com',
                               password: 'bobbing'}),
-        knex('users').insert({3,
+        knex('users').insert({id: 3,
                               name: 'Charlie McCharlie',
                               email: 'charlieischarlie@charlie.com',
                               password: 'char-lie'})
