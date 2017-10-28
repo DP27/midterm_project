@@ -24,6 +24,44 @@ function createNames(user) {
   return namesHTML;
 };
 
+function eventTitle(title) {
+  let eventHTML = $(".event-info").append(
+                  ($("<h1>").text(title))
+                  )
+  return eventHTML;
+}
+
+function eventDescription(description) {
+  let eventHTML = $(".event-info").append(
+                  ($("<p>").text(description))
+                  )
+  return eventHTML;
+}
+
+function eventLocation(location){
+    var geocoder = new google.maps.Geocoder();
+    var address = location;
+
+    if (geocoder) {
+       geocoder.geocode({ 'address': address }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            let lat = results[0].geometry.location.lat();
+            let lng = results[0].geometry.location.lng();
+            var uluru = {lat: lat, lng: lng};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 13,
+              center: uluru
+            });
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });
+            return;
+          }
+       });
+    }
+  }
+
 
 $(() => {
   var eventId = $("#event-id").text();
@@ -49,10 +87,23 @@ $(() => {
     }
   });
 
-  $('.names').hide();
-  $('.slots').click(function() {
-    $('.names').slideToggle();
-  });
+  $.ajax({
+    method: "GET",
+    url: "/api/load_event/" + eventId
+  }).done((event) => {
+    let title = event[0].title;
+    let description = event[0].description;
+    let location = event[0].location;
+
+    eventTitle(title);
+    eventDescription(description);
+    eventLocation(location);
+  })
+
+  //$('.names').hide();
+  //$('.slots').click(function() {
+    //$('.names').slideToggle();
+  //});
 
 
 });
