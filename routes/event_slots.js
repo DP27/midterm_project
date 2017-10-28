@@ -8,9 +8,9 @@ module.exports = (knex) => {
   router.get("/:id", (req, res) => {
 
     knex
-      .select("time")
+      .select("time", "date")
       .from("event_slots")
-      //.where("event_id", req.params.id)
+      .where("event_id", req.params.id)
       .then((results) => {
         res.json(results);
     });
