@@ -5,11 +5,12 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  router.get("/", (req, res) => {
+  router.get("/:id", (req, res) => {
+
     knex
-      .select("*")
+      .select("time", "date")
       .from("event_slots")
-      //.where("id" LIKE ??????)
+      .where("event_id", req.params.id)
       .then((results) => {
         res.json(results);
     });

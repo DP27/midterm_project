@@ -4,7 +4,8 @@
   <nav id="nav-bar">
     <% include ./partials/_nav.ejs %>
   </nav>
-  <body id="view-event-page">
+  <body>
+    <div id="event-id"><%= event %></div>
     <h4 class="container">Please enter your name and email to submit your availability.</h4>
     <form class="container" action="/<%= event %>" method="POST">
         <section class="name form-group">
@@ -15,18 +16,19 @@
           <label for="email">Email:</label>
               <input type="email" name="email" placeholder="username@domain.com" class="form-control">
         </section>
-        <section class="submit">
-          <button type="submit" class="btn">Submit</button>
-        </section>
-        <div id="view-page-body" class="container">
+        <section id="view-page-body" class="container">
+          <section class="slots">
+          </section>
+
             <div class="checkbox">
                 <label><input type="checkbox" name="event_slots" value="1">Option 1</label>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="event_slots" value="2">Option 2</label>
-            </div>
-        </div>
+
+        </section>
+        <section class="submit">
+          <button type="submit" class="btn">Submit</button>
+        </section>
     </form>
-    
+
   </body>
 </html>

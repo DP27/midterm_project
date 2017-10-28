@@ -1,15 +1,14 @@
-function createSlot(event_slot) {
+function createSlot(event_slots) {
+  let date = slot.date.replace("T00:00:00.000Z", "")
+  let time = slot.time
+
   let slotHTML = $(".slots").append(
-          $("<article>").addClass("each-slot")
-            .append($("<header>")
-            .append($("<span>")
-            .addClass("date")
-            .text(slot.date)
-            )
-            .append($("<span>")
-            .addClass("time")
-            .text(slot.time)
-            )
+          $("<div>").addClass("checkbox")
+            .append($("<label>")
+            .append($("<input>")
+            .attr('type', "checkbox")
+            .attr('name', "event_slots")
+            ).text(date + " " + time)
           )
       );
 
@@ -26,14 +25,15 @@ function createNames(user) {
 
 
 $(() => {
-
+  var eventId = $("#event-id").text();
+  $("#event-id").hide();
   // DOM has loaded
   $.ajax({
     method: "GET",
-    url: "/api/event_slots"
-  }).done((event_slot) => {
+    url: "/api/event_slots/" + eventId
+  }).done((event_slots) => {
 
-    for(slot of event_slot) {
+    for(slot of event_slots) {
       createSlot(slot);
     }
   });

@@ -87,18 +87,18 @@ app.post("/create", (req, res) => {
                       title:req.body.event_name,
                       url:`http://localhost:${PORT}/${uniqueId}`
                       };
-     
-    const eventDate = typeof req.body.date === 'string' ? [req.body.date] : req.body.date;                 
-    const eventTime = typeof req.body.time === 'string' ? [req.body.time] : req.body.time;  
+
+    const eventDate = typeof req.body.date === 'string' ? [req.body.date] : req.body.date;
+    const eventTime = typeof req.body.time === 'string' ? [req.body.time] : req.body.time;
     const eventDateTime = [];
     for (let i=0; i<eventDate.length; i++){
       eventDateTime.push([eventDate[i],eventTime[i]]);
-    }            
-    
+    }
+
     var event_slotsTable = {event_id: eventsTable.id,
                             date: eventDate,
                             time: eventTime};
-                    
+
     knex('users')
     .insert(userTable)
     .returning('id')
@@ -112,8 +112,8 @@ app.post("/create", (req, res) => {
               event_id: eventsTable.id,
                 date: timeSlot[0],
                 time: timeSlot[1]
-            })  
-          })  
+            })
+          })
           return Promise.all(promises);
         }).then(result => {
           return knex('events_users')
@@ -125,7 +125,7 @@ app.post("/create", (req, res) => {
       console.log('error', e);
     })
     }
-  })        
+  })
 
 app.get("/:id", (req, res) => {
   knex('events').select('*').where({id: req.params.id})
@@ -147,7 +147,7 @@ app.get("/:id", (req, res) => {
   })
 });
 
-app.post('/:id', (req, res) => {  
+app.post('/:id', (req, res) => {
   const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
   const eventSlots = eventSlotStrs.map(s => parseInt(s));
 
