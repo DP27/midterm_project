@@ -5,6 +5,13 @@
     <% include ./partials/_nav.ejs %>
   </nav>
   <body>
+    <section class="event-info">
+    </section>
+<div id="map" style="width:30%;height:300px;"></div>
+            <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
+            </script>
+
     <div id="event-id"><%= event %></div>
     <h4 class="container">Please enter your name and email to submit your availability.</h4>
     <form class="container" action="/<%= event %>" method="POST">
@@ -18,6 +25,13 @@
         </section>
         <section id="view-page-body" class="container">
           <section class="slots">
+
+<div class="checkbox"><label><input type="checkbox" name="event_slots" value="1">Option 1</label></div>
+
+<div class="checkbox"><label><input type="checkbox" name="event_slots" value="2">Option 2</label></div>
+
+<div class="checkbox"><label><input type="checkbox" name="event_slots" value="3">Option 3</label></div>
+
             <div class="names">
             </div>
           </section>
