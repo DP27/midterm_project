@@ -150,6 +150,7 @@ app.get("/:id", (req, res) => {
 });
 
 app.post('/:id', (req, res) => {
+  console.log("post req server side:",req.body.event_slots);
   const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
   const eventSlots = eventSlotStrs.map(s => parseInt(s));
 
