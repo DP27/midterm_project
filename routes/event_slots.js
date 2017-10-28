@@ -7,7 +7,7 @@ module.exports = (knex) => {
 
   router.get("/", (req, res) => {
     knex
-      .select("date")
+      .select("*")
       .from("event_slots")
       //.where("id" LIKE ??????)
       .then((results) => {

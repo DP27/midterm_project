@@ -102,12 +102,12 @@ app.post("/create", (req, res) => {
                                                 }
                                               });
                                             }
-                                          });                                    
-                                         }        
+                                          });
+                                         }
                                       })
-    
-    
-      
+
+
+
     console.log(req.body.event_name);
     console.log(req.body.date);
     console.log(req.body.time);
@@ -148,7 +148,7 @@ app.post('/vote', (req, res) => {
 
 
   // Step: 2 Create Votes
-  insert into votes (user_id, event_id) values (user_id, slot_id[0])
+  //insert into votes (user_id, event_id) values (user_id, slot_id[0])
 
 
 
