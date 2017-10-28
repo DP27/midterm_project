@@ -21,18 +21,16 @@ function createDateTime() {
   })
 }
 
-$(document).ready(function() {
-
-  $('#add-slot').on('click', createDateTime)
-
-  function getlocation(){
-
+$(document).ready(
+  
+function getlocation(){
       $('#location').on('click',function(){
           let locationText = $(document).find('.address').val();
           console.log(locationText);
           getLatLng(locationText);
       })
-  }
+      $('#add-slot').on('click', createDateTime);   
+  });
 
   function getLatLng(locationText){
     var geocoder = new google.maps.Geocoder();
@@ -60,5 +58,5 @@ $(document).ready(function() {
        });
     }
   }
-});
+
 

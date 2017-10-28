@@ -80,79 +80,93 @@ app.post("/create", (req, res) => {
     // IF ID ALREADY EXISTS IN DATABASE, GENERATE NEW ID
     var userTable = {email: req.body.email,
                     name: req.body.name,
-                    password: 'something'};
+                    password: ''};
     var eventsTable = {id :uniqueId,
                       description: req.body.description,
                       location: req.body.locationText,
                       title:req.body.event_name,
                       url:`http://localhost:${PORT}/${uniqueId}`
                       };
+                      console.log(eventsTable.title);
     var event_slotsTable = {event_id: eventsTable.id,
                             date: req.body.date,
                             time: req.body.time};
-    knex('users').insert(userTable).then(result => {
-                                        if(result){
-                                          knex('events').insert(eventsTable).then(result => {
-                                            if(result){
-                                              knex('event_slots').insert(event_slotsTable).then(result => {
-                                                if(result){
-                                                  knex('events_users').insert({owner: true}).then(result => {
-                                                    console.log(result);
-                                                  });
-                                                }
-                                              });
-                                            }
-                                          });
-                                         }
-                                      })
-
-
-
-    console.log(req.body.event_name);
-    console.log(req.body.date);
-    console.log(req.body.time);
-    console.log(req.body.locationText);
-    console.log(req.body.name);
-    console.log(req.body.email);
-    console.log(req.body.description);
-  res.redirect("/" + uniqueId);
+    knex('users')
+    .insert(userTable)
+    .returning('id')
+    .then(result => {
+      let user_id = result[0];
+        return knex('events')
+        .insert(eventsTable)
+        .then(result => {
+            return knex('event_slots')
+            .insert(event_slotsTable)
+            .then(result => {
+                return knex('events_users')
+                .insert({user_id, event_id: eventsTable.id ,owner: true})
+            });
+        });                                           
+    }).then(() => {
+      res.redirect("/" + uniqueId);
+    }).catch((e) => {
+      console.log('error', e);
+    });
   }
 });
 
 app.get("/:id", (req, res) => {
-  // CHECK DATABASE IF ID EXISTS
-  if (!(req.params.id /* IN DATABASE */)) {
-    res.status(302).send("Event does not exist.");
-  } else {
-    // GET EVENT INFO FROM DATABASE
-    res.render("view_event");
-  }
+  knex('events').select('*').where({id: req.params.id})
+  .then(rows => {
+    const event = rows[0];
+    if (event) {
+      // Found event respond with data
+      let event = req.params.id;
+      res.render('view_event', {event: event});
+    } else {
+      // Did not find event send 404
+      res.status(404).send("Event does not exist.");
+    }
+  })
+  .catch(error => {
+    // Send error to client
+    throw error;
+  })
 });
+
+app.post('/:id', (req, res) => {  
+  const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
+  const eventSlots = eventSlotStrs.map(s => parseInt(s));
+
+  knex('users')
+  .insert({name: req.body.name, email: req.body.email})
+  .returning('id')
+  .then(result => {
+    let user_id = result[0];
+    if (result) {
+      const promises = eventSlots.map((slot_id) => {
+        return knex('event_slots').select('id')
+          .where({event_id: req.params.id})
+          .then(result => {
+            return knex('votes')
+              .insert({user_id, slot_id});
+          });
+      });
+      return Promise.all(promises);
+    }
+  }).then(() => {
+    res.status(200).send("");
+  }).catch((e) => {
+    res.status(500).send();
+  });
+
+  // Step: 2 Create Votes
+  // insert into votes (user_id, event_id) values (user_id, slot_id[0])
+})
 
 app.post("/:id/delete", (req, res) => {
   delete // ID AND ASSOCIATED INFO FROM DATABASE
   res.redirect("/")
 });
-
-
-
-app.post('/vote', (req, res) => {
-  req.body = {
-    name: 'akkjhdf',
-    email: 'asdf',
-    event_slot_id: [3,2]
-  }
-
-
-  // Step 1: Create a user, and get a user id
-
-
-  // Step: 2 Create Votes
-  //insert into votes (user_id, event_id) values (user_id, slot_id[0])
-
-
-
-})
 
 
 app.listen(PORT, () => {

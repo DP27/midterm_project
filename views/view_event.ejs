@@ -6,7 +6,7 @@
   </nav>
   <body>
     <h4 class="container">Please enter your name and email to submit your availability.</h4>
-    <form class="container">
+    <form class="container" action="/<%= event %>" method="POST">
         <section class="name form-group">
           <label>Name:</label>
               <input type="text" name="name" placeholder="Your Name" class="form-control">
@@ -18,12 +18,15 @@
         <section class="submit">
           <button type="submit" class="btn">Submit</button>
         </section>
+        <div id="view-page-body" class="container">
+            <div class="checkbox">
+                <label><input type="checkbox" name="event_slots" value="1">Option 1</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="event_slots" value="2">Option 2</label>
+            </div>
+        </div>
     </form>
-    <section id="view-page-body" class="container">
-      <section class="slots">
-        <div class="names"></div>
-      </section>
-
-    </section>
+    
   </body>
 </html>
