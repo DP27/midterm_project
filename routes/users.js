@@ -9,6 +9,8 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("users")
+
+
       .then((results) => {
         res.json(results);
     });
@@ -16,3 +18,11 @@ module.exports = (knex) => {
 
   return router;
 }
+
+
+
+
+// event slots: req.params.id === event_id
+// event slots: slot_ id contains event_id
+// votes: user_id associated with slot_id
+// users: user_id
