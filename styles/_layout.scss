@@ -1,7 +1,6 @@
 body {
   margin: 0;
-  background: rgb(179, 167, 167);
-
+  background-color: black;
 }
 
 video { 
@@ -14,13 +13,18 @@ video {
   height: auto;
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
-  opacity: 0.2;
+  opacity: 0.3;
 }
 
 .main-body {
   padding: 100px;
   z-index:1;
   opacity: 1;
+  color: white;
+  p {
+    font-size: x-large;
+    color: white;
+  }
 }
 
 #view-page-body {
@@ -62,13 +66,11 @@ video {
 #location {
   margin: 10px;
 }
-// .event_details {
-//   padding: 100px;
-//   button {
-//     padding: 10px;
-//     margin: 20px;
-//   }
-//   li {
-//     padding: 10px;
-//   }
-// }
+
+#create-event-page {
+  background-color: rgba(99, 96, 96, 0.486);
+}
+
+#event-id {
+  background-color: rgba(99, 96, 96, 0.486);
+}
