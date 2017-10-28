@@ -96,28 +96,21 @@ app.post("/create", (req, res) => {
     .returning('id')
     .then(result => {
       let user_id = result[0];
-      if(result){
-        knex('events')
+        return knex('events')
         .insert(eventsTable)
         .then(result => {
-          if(result){
-            knex('event_slots')
+            return knex('event_slots')
             .insert(event_slotsTable)
             .then(result => {
-              if(result){
-                knex('events_users')
+                return knex('events_users')
                 .insert({user_id, event_id: eventsTable.id ,owner: true})
-                .then(result => {
-                  console.log(result);
-                });
-              }
             });
-          }
-        });                                    
-      }        
-    })
-
-  res.redirect("/" + uniqueId);
+        });                                           
+    }).then(() => {
+      res.redirect("/" + uniqueId);
+    }).catch((e) => {
+      console.log('error', e);
+    });
   }
 });
 
@@ -141,23 +134,31 @@ app.get("/:id", (req, res) => {
 });
 
 app.post('/:id', (req, res) => {  
+  const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
+  const eventSlots = eventSlotStrs.map(s => parseInt(s));
+
   knex('users')
   .insert({name: req.body.name, email: req.body.email})
   .returning('id')
   .then(result => {
     let user_id = result[0];
     if (result) {
-      return knex('event_slots').select('id').where({event_id: req.params.id})
-      .then(result => {
-        console.log('event-slots result: ', result[0].id);
-        return knex('votes')
-          .insert({user_id, slot_id: result[0].id})
+      const promises = eventSlots.map((slot_id) => {
+        return knex('event_slots').select('id')
+          .where({event_id: req.params.id})
           .then(result => {
-            console.log(result);
+            return knex('votes')
+              .insert({user_id, slot_id});
           });
-      })
+      });
+      return Promise.all(promises);
     }
-  })
+  }).then(() => {
+    res.status(200).send("");
+  }).catch((e) => {
+    res.status(500).send();
+  });
+
   // Step: 2 Create Votes
   // insert into votes (user_id, event_id) values (user_id, slot_id[0])
 })

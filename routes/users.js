@@ -9,8 +9,8 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("users")
-      .join("votes", 'users.id', '=', 'contacts.user_id')
-      .join('event_slots', 'users.id', '=', 'contacts.user_id')
+      // .join("votes", 'users.id', '=', 'contacts.user_id')
+      // .join('event_slots', 'users.id', '=', 'contacts.user_id')
       .then((results) => {
         res.json(results);
     });
