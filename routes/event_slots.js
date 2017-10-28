@@ -8,9 +8,8 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("users")
-      .join("votes", 'users.id', '=', 'contacts.user_id')
-      .join('event_slots', 'users.id', '=', 'contacts.user_id')
+      .from("event_slots")
+      //.where("id" LIKE ??????)
       .then((results) => {
         res.json(results);
     });

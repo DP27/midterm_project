@@ -8,7 +8,7 @@
     <nav id="nav-bar">
             <% include ./partials/_nav.ejs %>
     </nav>
-  
+
     <!-- Page-specific (main) content here -->
     <main class="container">
       <form action="/create" method="post">
@@ -34,7 +34,7 @@
             <button id='location' type="button" class="btn">Search</button>
           <div id="map" style="width:30%;height:300px;"></div>
             <script>
-            
+
               function initMap() {
                 var uluru = {lat: 43.6718, lng: -79.4668};
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -51,22 +51,18 @@
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&callback=initMap">
             </script>
         </section>
-        <section class="timeslot-first form-group">
-            <label>Timeslot(Most Preferred):</label>
-                <input id="date" name="date" type="date" class= "form-control" >
-                <input id="time" name="time" type="time" class= "form-control">
+        <section class="timeslots">
+          <h3>Time Slots</h3>
+          <section class="timeslot form-group">
+            <input id="date" name="dateslot" type="date" class="form-control">
+            <input id="time" name="timeslot" type="time" class="form-control">
+          </section>
         </section>
+        <button type="button" class="btn" id="add-slot">+</button>
         <section class="submit">
           <button type="submit" class="btn">Submit</button>
         </section>
-           
-        
-        
       </form>
-      
-    
-      
     </main>
-
   </body>
 </html>
