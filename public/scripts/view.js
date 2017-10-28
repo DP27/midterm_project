@@ -1,3 +1,4 @@
+
 function createSlot(event_slots) {
   let date = slot.date.replace("T00:00:00.000Z", "")
   let time = slot.time
@@ -48,9 +49,9 @@ $(() => {
     }
   });
 
-  $('.slot-names').hide();
-  $('each-slot').click(function() {
-    $('.slot-names').slideToggle();
+  $('.names').hide();
+  $('.slots').click(function() {
+    $('.names').slideToggle();
   });
 
 
