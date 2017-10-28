@@ -2,6 +2,8 @@
 function createSlot(event_slots) {
   let date = slot.date.replace("T00:00:00.000Z", "")
   let time = slot.time
+  let slot_id = slot.id
+  console.log(slot_id);
 
   let slotHTML = $(".slots").append(
           $("<div>").addClass("checkbox")
@@ -9,6 +11,7 @@ function createSlot(event_slots) {
             .append($("<input>")
             .attr('type', "checkbox")
             .attr('name', "event_slots")
+            .attr('value', slot_id)
             ).text(date + " " + time)
           )
       );
