@@ -2,12 +2,10 @@ exports.seed = function(knex, Promise) {
   return knex('event_slots').del()
     .then(function () {
       return Promise.all([
-        knex('event_slots').insert({
-          id: 1,
-          event_id: 90283,
-          date: "2017/12/06",
-          time: "0830"
-        }),
+        knex('event_slots').insert({id: 1,
+                                    event_id: 90283,
+                                    date: "2017/12/06",
+                                    time: "0830"}),
         knex('event_slots').insert({id: 2,
                                     event_id: 90283,
                                     date: "2017/12/06",
