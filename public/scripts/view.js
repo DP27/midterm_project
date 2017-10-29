@@ -1,18 +1,16 @@
 
 function createSlot(event_slots) {
-  let date = slot.date.replace("T00:00:00.000Z", "")
-  let time = slot.time
-  let slot_id = slot.id
-  console.log(slot_id);
+  let date = user.date.replace("T00:00:00.000Z", "")
+  let time = user.time
+  let slot_id = user.slot_id
+  let names = user.name
 
   let slotHTML = $(".slots").append(
           $("<div>").addClass("checkbox")
-            .append($("<label>")
+            .append($("<label>").text(date + " " + time)
             .append($("<input>")
-            .attr('type', "checkbox")
-            .attr('name', "event_slots")
-            .attr('value', slot_id)
-            ).text(date + " " + time)
+            .attr({type: "checkbox", name: "event_slots", value: slot_id})
+            )
           )
       );
 
@@ -70,25 +68,25 @@ $(() => {
   var eventId = $("#event-id").text();
   $("#event-id").hide();
   // DOM has loaded
-  $.ajax({
-    method: "GET",
-    url: "/api/event_slots/" + eventId
-  }).done((event_slots) => {
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/event_slots/" + eventId
+  // }).done((event_slots) => {
 
-    for(slot of event_slots) {
-      createSlot(slot);
-    }
-  });
+  //   for(slot of event_slots) {
+  //     createSlot(slot);
+  //   }
+  // });
 
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/users"
+  // }).done((users) => {
 
-    for(user of users) {
-      createNames(user);
-    }
-  });
+  //   for(user of users) {
+  //     createNames(user);
+  //   }
+  // });
 
   $.ajax({
     method: "GET",
@@ -103,10 +101,17 @@ $(() => {
     eventLocation(location);
   })
 
-  //$('.names').hide();
-  //$('.slots').click(function() {
-    //$('.names').slideToggle();
-  //});
+  $.ajax({
+    method: "GET",
+    url: "/api/votes/" + eventId
+  }).done((users) => {
+    console.log(users)
+
+    for(user of users) {
+      createSlot(user)
+    }
+
+  })
 
 
 });
