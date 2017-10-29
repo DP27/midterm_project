@@ -18,6 +18,7 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const event_slotsRoutes = require("./routes/event_slots");
 const load_eventRoutes = require("./routes/load_event");
+const load_votesRoutes = require("./routes/votes");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -41,6 +42,7 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/event_slots", event_slotsRoutes(knex));
 app.use("/api/load_event", load_eventRoutes(knex));
+app.use("/api/votes", load_votesRoutes(knex));
 
 // GENERATE ID
 function generateRandomString(length) {
