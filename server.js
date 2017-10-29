@@ -15,7 +15,6 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
 const event_slotsRoutes = require("./routes/event_slots");
 const load_eventRoutes = require("./routes/load_event");
 const load_votesRoutes = require("./routes/votes");
@@ -39,7 +38,6 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
 app.use("/api/event_slots", event_slotsRoutes(knex));
 app.use("/api/load_event", load_eventRoutes(knex));
 app.use("/api/votes", load_votesRoutes(knex));
@@ -48,7 +46,6 @@ app.use("/api/votes", load_votesRoutes(knex));
 function generateRandomString(length) {
   let randomString = "";
   const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
 
   for (var i = 0; i < length; i++) {
     randomString += charSet.charAt(Math.floor(Math.random() * charSet.length));
@@ -128,8 +125,8 @@ app.post("/create", (req, res) => {
     }).catch((e) => {
       console.log('error', e);
     })
-    }
-  })
+  }
+})
 
 app.get("/:id", (req, res) => {
   knex('events').select('*').where({id: req.params.id})
@@ -139,7 +136,6 @@ app.get("/:id", (req, res) => {
         // Found event respond with data
       let event = req.params.id;
       res.render('view_event', {event: event});
-
     } else {
       // Did not find event send 404
       res.status(404).send("Event does not exist.");
@@ -152,7 +148,6 @@ app.get("/:id", (req, res) => {
 });
 
 app.post('/:id', (req, res) => {
-  console.log("post req server side:",req.body.event_slots);
   const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
   const eventSlots = eventSlotStrs.map(s => parseInt(s));
 

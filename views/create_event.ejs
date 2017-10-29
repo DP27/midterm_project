@@ -4,35 +4,33 @@
 
   <body id="create-event-page">
 
-    <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-            <% include ./partials/_nav.ejs %>
+      <% include ./partials/_nav.ejs %>
     </nav>
 
-    <!-- Page-specific (main) content here -->
     <main class="container">
       <form action="/create" method="post">
         <section class="name form-group">
           <label>Name</lable>
-              <input type="string" name="name" placeholder="Your Name" class="form-control">
+          <input type="string" name="name" placeholder="Your Name" class="form-control">
         </section>
         <section class="email form-group">
-            <label for="email">Email address:</label>
-            <input type="email" name="email" placeholder="username@domain.com" class="form-control">
+          <label for="email">Email address:</label>
+          <input type="email" name="email" placeholder="username@domain.com" class="form-control">
         </section>
         <section class="title form-group">
           <label>Event Title:</label>
-              <input type="text" name="event_name" placeholder="Title" class="form-control">
+          <input type="text" name="event_name" placeholder="Title" class="form-control">
         </section>
         <section class="description form-group">
           <label>Description:</label>
-              <textarea name="description" placeholder="What's the event about?" class="form-control"></textarea>
+          <textarea name="description" placeholder="What's the event about?" class="form-control"></textarea>
         </section>
         <section class="location form-group">
           <label>Location:</label>
             <input class="address form-control" type="text" name="locationText" placeholder="Location">
             <button id='location' type="button" class="btn">Search</button>
-          <div id="map" style="width:30%;height:300px;"></div>
+            <div id="map" style="width:30%;height:300px;"></div>
             <script>
 
               function initMap() {

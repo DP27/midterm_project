@@ -5,34 +5,33 @@
     <% include ./partials/_nav.ejs %>
   </nav>
   <body id="view-event-page">
-    <section class="event-info">
-    </section>
-<div id="map" style="width:30%;height:300px;"></div>
-            <script async defer
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
-            </script>
-
-28d92673380ecdd7a5ac650b769517e023d6d034
+    <section class="event-info"></section>
+    <div id="map" style="width:30%;height:300px;"></div>
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
+      </script>
     <div id="event-id"><%= event %></div>
     <h4 class="container">Please enter your name and email to submit your availability.</h4>
     <form class="container" action="/<%= event %>" method="POST">
-        <section class="name form-group">
-          <label>Name:</label>
-              <input type="text" name="name" placeholder="Your Name" class="form-control">
-        </section>
-        <section class="email form-group">
-          <label for="email">Email:</label>
-              <input type="email" name="email" placeholder="username@domain.com" class="form-control">
-        </section>
-        <section id="view-page-body" class="container">
-          <section class="slots">
 
-          </section>
-        </section>
-        <section class="submit">
-          <button type="submit" class="btn">Submit</button>
-        </section>
+      <section class="name form-group">
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="Your Name" class="form-control">
+      </section>
+
+      <section class="email form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="username@domain.com" class="form-control">
+      </section>
+
+      <section id="view-page-body" class="container">
+        <section class="slots"></section>
+      </section>
+
+      <section class="submit">
+        <button type="submit" class="btn">Submit</button>
+      </section>
+
     </form>
-
   </body>
 </html>
