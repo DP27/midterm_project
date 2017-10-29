@@ -151,6 +151,13 @@ app.post('/:id', (req, res) => {
   const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
   const eventSlots = eventSlotStrs.map(s => parseInt(s));
 
+if (!req.body.name) {
+    res.status(400).send("Please input a name.");
+  } else if (!req.body.email) {
+    res.status(400).send("Please input an email.");
+  //} else if (!slot_id) {
+    //res.status(400).send("Please vote at least once.");
+  } else {
   knex('users')
   .insert({name: req.body.name, email: req.body.email})
   .returning('id')
@@ -172,6 +179,7 @@ app.post('/:id', (req, res) => {
   }).catch((e) => {
     res.status(500).send();
   });
+  }
 })
 
 app.post("/:id/delete", (req, res) => {
@@ -183,37 +191,3 @@ app.post("/:id/delete", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
