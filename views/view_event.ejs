@@ -5,8 +5,8 @@
     <% include ./partials/_nav.ejs %>
   </nav>
   <body id="view-event-page">
-    <section class="event-info"></section>
-    <div id="map" style="width:30%;height:300px;"></div>
+    <section class="event-info container"></section>
+    <div id="map" style="width:50%;height:300px;"></div>
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
       </script>
@@ -28,7 +28,7 @@
         <section class="slots"></section>         
       </section>
       
-      <section class="submit">
+      <section class="submit" id="vote">
         <button type="submit" class="btn">Submit</button>
       </section>
 
