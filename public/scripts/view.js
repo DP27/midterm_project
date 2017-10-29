@@ -1,29 +1,46 @@
-
 function createSlot(event_slots) {
-  let date = user.date.replace("T00:00:00.000Z", "")
-  let time = user.time
-  let slot_id = user.slot_id
-  let names = user.name
+  let date = slot.date.replace("T00:00:00.000Z", " ")
+  let time = slot.time
+  let slot_id = slot.id
 
-  let slotHTML = $(".slots").append(
-          $("<div>").addClass("checkbox")
-            .append($("<label>").text(date + " " + time)
-            .append($("<input>")
-            .attr({type: "checkbox", name: "event_slots", value: slot_id})
-            )
-          )
-      );
+//   const str = `<div class="dropdown">
+//   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">See Votes
+//   <span class="caret"></span></button>
+//   <ul class="dropdown-menu">
+//     <li><a>name1</a></li>
+//   </ul>
+// </div>`
+
+
+  let inHTML = `<div class = "checkbox" data-like=${slot_id}>
+  <label for="checkbox"> ${date}${time}
+  <input type="checkbox" name = "event_slots" value=${slot_id}>
+  </label>
+  </div>`
+
+  let slotHTML = $(".slots").append(inHTML);
+      //     $("<div>").addClass("checkbox").data('info',1)
+      //       .append($("<label>").text(date + " " + time)
+      //       .append($("<input>")
+      //       .attr({type: "checkbox", name: "event_slots", value: slot_id})
+      //       )
+      // //    )
+
+      // .append($.parseHTML(str))
 
   return slotHTML;
 }
 
-function createNames(user) {
-  let namesHTML = $(".names").append(
-                  $("<p>").addClass("slot-names")
-                  .text(user.name)
-                  );
+function createNames(name, slotId) {
+
+    //var datasetTest = $(".checkbox").dataset['data-info'];
+
+  $(".checkbox").filter(`[data-like='${slotId}']`);
+  var namesHTML = $(".checkbox").filter(`[data-like='${slotId}']`)
+                  .append($("<p>")
+                  .text(name));
   return namesHTML;
-};
+}
 
 function eventTitle(title) {
   let eventHTML = $(".event-info").append(
@@ -67,26 +84,15 @@ function eventLocation(location){
 $(() => {
   var eventId = $("#event-id").text();
   $("#event-id").hide();
-  // DOM has loaded
-  // $.ajax({
-  //   method: "GET",
-  //   url: "/api/event_slots/" + eventId
-  // }).done((event_slots) => {
 
-  //   for(slot of event_slots) {
-  //     createSlot(slot);
-  //   }
-  // });
-
-  // $.ajax({
-  //   method: "GET",
-  //   url: "/api/users"
-  // }).done((users) => {
-
-  //   for(user of users) {
-  //     createNames(user);
-  //   }
-  // });
+  $.ajax({
+    method: "GET",
+    url: "/api/event_slots/" + eventId
+  }).done((event_slots) => {
+      for(slot of event_slots) {
+      createSlot(slot);
+    }
+  });
 
   $.ajax({
     method: "GET",
@@ -95,7 +101,6 @@ $(() => {
     let title = event[0].title;
     let description = event[0].description;
     let location = event[0].location;
-
     eventTitle(title);
     eventDescription(description);
     eventLocation(location);
@@ -105,13 +110,10 @@ $(() => {
     method: "GET",
     url: "/api/votes/" + eventId
   }).done((users) => {
-    console.log(users)
-
     for(user of users) {
-      createSlot(user)
+      let name = user.name;
+      let slotId = user.slot_id;
+      createNames(name,slotId);
     }
-
   })
-
-
 });
