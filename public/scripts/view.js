@@ -12,11 +12,11 @@ function createSlot(event_slots) {
   const betterTime = time.substring(0,5);
   const newTime = betterTime
   let slot_id = slot.id
-  let inhtml = `<div class = "checkbox" data-like=${slot_id}>
-  <label for="checkbox" style="padding-right: 20px"> ${betterDate}${newTime}
-  <input type="checkbox" name="event_slots" value=${slot_id}>
-  </label>
-  </div>`
+  let inhtml = `<div class= "checkbox" data-like=${slot_id}>
+                <input type= "checkbox" name="event_slots" value=${slot_id}>
+                <label for= "checkbox" style="padding-right: 50px">
+                ${betterDate}${newTime}</label>
+                </div>`
   let slotHTML = $(".slots").append(inhtml);
   return slotHTML;
 }
