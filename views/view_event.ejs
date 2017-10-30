@@ -5,14 +5,15 @@
     <% include ./partials/_nav.ejs %>
   </nav>
   <body id="view-event-page">
-    <section class="event-info container"></section>
-    <div id="map" style="width:50%;height:300px;"></div>
-      <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
-      </script>
-    <div id="event-id"><%= event %></div>
-    <h4 class="container">Please enter your name and email to submit your availability.</h4>
-    <form class="container" action="/<%= event %>" method="POST">
+    <section class="event-info"></section>
+    <h4>Location</h4>
+      <div id="map"></div>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
+        </script>
+      <div id="event-id"><%= event %></div>
+    <h4 class="container-fluid">Please enter your name and email to submit your availability.</h4>
+    <form class="container-fluid" action="/<%= event %>" method="POST">
 
       <section class="name form-group">
         <label>Name:</label>
@@ -24,12 +25,12 @@
         <input type="email" name="email" placeholder="username@domain.com" class="form-control">
       </section>
 
-      <section id="view-page-body" class="container">
+      <section id="view-page-body" class="container-fluid">
         <section class="slots"></section>
       </section>
-      
-      <section class="submit" id="vote">
-        <button type="submit" class="btn">Submit</button>
+
+      <section class="submit">
+        <button type="submit" class="btn btn-lg">Submit</button>
       </section>
 
     </form>

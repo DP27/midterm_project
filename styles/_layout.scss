@@ -1,9 +1,10 @@
 body {
   margin: 0;
   background-color: black;
+  font-family: 'Shadows Into Light Two', cursive;
 }
 
-video { 
+video {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,6 +15,24 @@ video {
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
   opacity: 0.3;
+}
+
+.container-fluid {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  font-family: 'Shadows Into Light Two', cursive;
+
+  .submit {
+    .btn {
+      margin-top: 20px;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+form {
+
 }
 
 .main-body {
@@ -32,34 +51,47 @@ video {
   label {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 2px;
+    margin-left: 10px;
     padding-right: 2px;
     margin: 10px;
     border: 1px solid, lightslategray;
     font-size: x-large;
     border-radius: 10px;
-    background-color: lightslategrey;
+    background-color: lightslategray;
 
   }
 }
 
-.timeslot-first {
-  padding-right: 50vw;
+.form-group {
+  margin: 5;
+  float: center;
+}
+
+.form-control {
+  float: center
+}
+
+.timeslot {
+  width: 200px;
 }
 .email {
-  padding-right: 50vw;
+  width: 300px;
 }
 
 .name {
-  padding-right: 50vw;
+  width: 300px;
+}
+
+.form-control {
+  width: 300px;
 }
 
 .title {
-  padding-right: 50vw;
+  width: 300px;
 }
 
 .description {
-  padding-right: 50vw;
+  width: 300px;
 }
 
 
@@ -68,20 +100,28 @@ video {
 }
 
 #create-event-page {
-  background-color: rgba(99, 96, 96, 0.486);
+  background-color: #E9B000;
+  background: linear-gradient(#f6d365, #fda085);
 }
 
 #view-event-page {
-  background-color: rgba(99, 96, 96, 0.486);
-  #map {
-    margin-left: 5%;
+  background-color: #E9B000;
+  background: linear-gradient(#2af598, #009efd);
+
+
     margin-top: 20px;
     margin-bottom: 20px;
-  }
+
   h4 {
     padding: 20px;
   }
 }
+
+.event-info {
+  padding-left: 20px;
+}
+
+
 
 #view-page-body {
   padding: 10px;
@@ -92,17 +132,23 @@ video {
   padding-top: 30px;
 }
 
-.container {
-  .submit {
-    .btn {
-      margin-top: 20px;
-      margin-bottom: 50px;
-    }
+.location {
+  width: 300px;
+  input {
+    padding-right: 5%;
   }
 }
 
-.location {
-  input {
-    padding-right: 50%;
-  }
+#map {
+  margin-left: 10px;
+  width: 30%;
+  height: 300px;
+}
+
+#location {
+  float: right;
+}
+
+.checkbox {
+  font-size: 100%;
 }
