@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include partials/_head.ejs %>
-
-  <body id="create-event-page">
-
-    <nav id="nav-bar">
+      <nav id="nav-bar">
       <% include ./partials/_nav.ejs %>
     </nav>
 
-    <main class="container">
+  <body id="create-event-page">
+
+    <main class="container-fluid center-block">
       <form action="/create" method="post">
         <section class="name form-group">
           <label>Name</lable>
           <input type="string" name="name" placeholder="Your Name" class="form-control">
         </section>
         <section class="email form-group">
-          <label for="email">Email address:</label>
-          <input type="email" name="email" placeholder="username@domain.com" class="form-control">
+          <label for="email">Email</label>
+          <input type="email" name="email" placeholder="email@email.com" class="form-control">
         </section>
         <section class="title form-group">
-          <label>Event Title:</label>
+          <h3>Event Title</h3>
           <input type="text" name="event_name" placeholder="Title" class="form-control">
         </section>
         <section class="description form-group">
-          <label>Description:</label>
-          <textarea name="description" placeholder="What's the event about?" class="form-control"></textarea>
+          <h3>Description</h3>
+          <textarea name="description" placeholder="Describe your event" class="form-control"></textarea>
         </section>
         <section class="location form-group">
-          <label>Location:</label>
+          <h3>Location</h3>
             <input class="address form-control" type="text" name="locationText" placeholder="Location">
             <button id='location' type="button" class="btn">Search</button>
-            <div id="map" style="width:70%;height:300px;"></div>
+            <div id="map"></div>
             <script>
 
               function initMap() {
@@ -58,7 +57,7 @@
         </section>
         <button type="button" class="btn" id="add-slot">+</button>
         <section class="submit">
-          <button type="submit" class="btn">Submit</button>
+          <button type="submit" class="btn btn-lg">Submit</button>
         </section>
       </form>
     </main>
