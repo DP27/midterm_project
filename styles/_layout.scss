@@ -106,8 +106,7 @@ form {
 
 #view-event-page {
   background-color: #E9B000;
-  background: linear-gradient(#2af598, #009efd);
-
+  background: linear-gradient(#f6d365, #fda085);
 
     margin-top: 20px;
     margin-bottom: 20px;
@@ -116,6 +115,8 @@ form {
     padding: 20px;
   }
 }
+
+
 
 .event-info {
   padding-left: 10px;
@@ -150,7 +151,8 @@ form {
 }
 
 .checkbox label {
-  display: block;
+  display: inline-block;
+
   margin: 5px;
 }
 

@@ -11,7 +11,7 @@ function createSlot(event_slots) {
   let time = slot.time
   let slot_id = slot.id
   let inhtml = `<div class = "checkbox" data-like=${slot_id}>
-  <label for="checkbox"> ${betterDate}${time}
+  <label for="checkbox"><span>${betterDate}${time}
   <input type="checkbox" name="event_slots" value=${slot_id}>
   </label>
   </div>`
