@@ -100,13 +100,11 @@ form {
 }
 
 #create-event-page {
-  background-color: #E9B000;
-  background: linear-gradient(#f6d365, #fda085);
+  background: linear-gradient(#6a85b6, #bac8e0);
 }
 
 #view-event-page {
-  background-color: #E9B000;
-  background: linear-gradient(#f6d365, #fda085);
+  background: linear-gradient(#6a85b6, #bac8e0);
 
     margin-top: 20px;
     margin-bottom: 20px;
@@ -142,7 +140,7 @@ form {
 
 #map {
   margin-left: 10px;
-  width: 30%;
+
   height: 300px;
 }
 
@@ -152,7 +150,6 @@ form {
 
 .checkbox label {
   display: inline-block;
-
   margin: 5px;
 }
 
