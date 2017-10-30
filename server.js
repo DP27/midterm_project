@@ -121,7 +121,13 @@ app.post("/create", (req, res) => {
           .insert({user_id, event_id: eventsTable.id, owner: true})
         })
     }).then((result) => {
-      res.redirect("/" + uniqueId);
+      //res.redirect("/" + uniqueId);
+      return knex('events').select('url').where({id : eventsTable.id})
+        .then((result) => {
+          //res.status(200).send(`Your event has been created. Here is the link to vote: ${result[0].url}` )
+          res.render('link', {link: result[0].url});
+        })
+      
     }).catch((e) => {
       console.log('error', e);
     })
