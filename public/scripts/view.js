@@ -1,9 +1,16 @@
 function createSlot(event_slots) {
   let date = slot.date.replace("T00:00:00.000Z", "")
+  const year = date.substring(0,4);
+  const month = date.substring(5,7);
+  const day = date.substring(8,10);
+
+  let newDate = new Date(year, month-1, day);
+  let betterDate = newDate.toString().replace("00:00:00 GMT-0500", "");
+
   let time = slot.time
   let slot_id = slot.id
   let inhtml = `<div class = "checkbox" data-like=${slot_id}>
-  <label for="checkbox"> ${date}${time}
+  <label for="checkbox"> ${betterDate}${time}
   <input type="checkbox" name = "event_slots" value=${slot_id}>
   </label>
   </div>`
