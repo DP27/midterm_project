@@ -125,7 +125,7 @@ app.post("/create", (req, res) => {
       return knex('events').select('url').where({id : eventsTable.id})
         .then((result) => {
           //res.status(200).send(`Your event has been created. Here is the link to vote: ${result[0].url}` )
-          res.render('link', {link: result[0].url});
+          res.render('link', {link: result[0].url, eventId: eventsTable.id});
         })
       
     }).catch((e) => {
