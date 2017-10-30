@@ -5,7 +5,7 @@ function createSlot(event_slots) {
   const day = date.substring(8,10);
 
   let newDate = new Date(year, month-1, day);
-  let betterDate = newDate.toString().replace("00:00:00 GMT-0500", "");
+  let betterDate = newDate.toString().replace("00:00:00", "");
 
   let time = slot.time
   let slot_id = slot.id

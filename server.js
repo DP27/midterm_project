@@ -143,23 +143,20 @@ app.get("/:id", (req, res) => {
   })
   .catch(error => {
     // Send error to client
-    throw error;
+    res.status(500).send(error);
   })
 });
 
 app.post('/:id', (req, res) => {
-  const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
-  const eventSlots = eventSlotStrs.map(s => parseInt(s));
-
-  console.log(req.body.slot_id);
-
   if (!req.body.name) {
     res.status(400).send("Please input a name.");
   } else if (!req.body.email) {
     res.status(400).send("Please input an email.");
-  // } else if (!req.body.slot_id) {
-  //   res.status(400).send("Please vote at least once.");
+  } else if (!req.body.event_slots) {
+     res.status(400).send("Please vote at least once.");
   } else {
+  const eventSlotStrs = typeof req.body.event_slots === 'string' ? [req.body.event_slots] : req.body.event_slots;
+  const eventSlots = eventSlotStrs.map(s => parseInt(s));
   knex('users')
   .insert({name: req.body.name, email: req.body.email})
   .returning('id')
@@ -179,16 +176,10 @@ app.post('/:id', (req, res) => {
   }).then((result) => {
     res.status(200).send("Thank you for voting.");
   }).catch((e) => {
-    res.status(500).send();
+    res.status(500).send(error);
   });
   }
 })
-
-app.post("/:id/delete", (req, res) => {
-  delete // ID AND ASSOCIATED INFO FROM DATABASE
-  res.redirect("/")
-});
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
