@@ -20,7 +20,7 @@ function createSlot(event_slots) {
 }
 function createNames(name, slotId) {
   var namesHTML = $(".checkbox").filter(`[data-like='${slotId}']`).append(
-                  $("<p>").text(name));
+                  $("<p>").addClass("each-name").text(name));
   return namesHTML;
 };
 function eventTitle(title) {

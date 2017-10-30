@@ -118,7 +118,7 @@ form {
 }
 
 .event-info {
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 
@@ -149,6 +149,12 @@ form {
   float: right;
 }
 
-.checkbox {
+.checkbox label {
+  display: block;
+  margin: 5px;
+}
+
+.each-name {
+  float: center;
   font-size: 100%;
 }

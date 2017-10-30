@@ -12,17 +12,17 @@
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGGhzVWA98mR7ZYK31u_ZgsDOtAS_YIqI&">
         </script>
       <div id="event-id"><%= event %></div>
-    <h4 class="container-fluid">Please enter your name and email to submit your availability.</h4>
+    <h4 class="container-fluid">Enter your name and email to submit your availability.</h4>
     <form class="container-fluid" action="/<%= event %>" method="POST">
 
       <section class="name form-group">
-        <label>Name:</label>
+        <label>Name</label>
         <input type="text" name="name" placeholder="Your Name" class="form-control">
       </section>
 
       <section class="email form-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="username@domain.com" class="form-control">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="email@email.com" class="form-control">
       </section>
 
       <section id="view-page-body" class="container-fluid">
